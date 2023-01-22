@@ -6,5 +6,4 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-raw-window-handle = "0.5.0"
-winit = "0.27.5"
+glium = "0.32.1"
