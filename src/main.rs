@@ -16,26 +16,14 @@ fn main() {
     let display = glium::Display::new(wb, cb, &event_loop).unwrap();
 
     let upper_triangle = [
-        Vertex {
-            position: [-0.95, 0.95],
-        },
-        Vertex {
-            position: [-0.95, -0.95],
-        },
-        Vertex {
-            position: [0.95, 0.95],
-        },
+        Vertex { position: [-0.95, 0.95] },
+        Vertex { position: [-0.95, -0.95] },
+        Vertex { position: [0.95, 0.95] },
     ];
     let bottom_triangle = [
-        Vertex {
-            position: [0.95, -0.95],
-        },
-        Vertex {
-            position: [-0.95, -0.95],
-        },
-        Vertex {
-            position: [0.95, 0.95],
-        },
+        Vertex { position: [0.95, -0.95] },
+        Vertex { position: [-0.95, -0.95] },
+        Vertex { position: [0.95, 0.95] },
     ];
 
     event_loop.run(move |ev, _, control_flow| {
