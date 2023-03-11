@@ -1,11 +1,16 @@
+use std::mem;
+
+use freetype::Library;
 use glium::glutin;
 use glium::glutin::event::Event;
 use glium::glutin::event::WindowEvent;
 use glium::glutin::event_loop::ControlFlow;
+use glium::VertexBuffer;
 
 use glium::Surface;
 
 mod helpers;
+use freetype::face::LoadFlag;
 use helpers::Vertex;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
@@ -60,19 +65,25 @@ fn render_background(application_state: ApplicationState, frame: &mut glium::Fra
 }
 
 fn render_content(display: &glium::Display, frame: &mut glium::Frame) {
-    // TODO: instead of drawing triangles. start rendering html and css thingys
-    let upper_triangle = [
-        Vertex { position: [-0.95, 0.95] },
-        Vertex { position: [-0.95, -0.95] },
-        Vertex { position: [0.95, 0.95] },
-    ];
-    let bottom_triangle = [
-        Vertex { position: [0.95, -0.95] },
-        Vertex { position: [-0.95, -0.95] },
-        Vertex { position: [0.95, 0.95] },
-    ];
-    helpers::draw_triangle(upper_triangle.to_vec(), &display, frame);
-    helpers::draw_triangle(bottom_triangle.to_vec(), &display, frame);
+    // render html content
+    let html = r#"<body> <h1>Hello</h1> </body>"#;
+
+    let lib = Library::init().unwrap();
+    let face = lib.new_face("C:\\Windows\\fonts\\arial.ttf", 0).unwrap();
+
+    face.set_char_size(40 * 64, 0, 50, 0).unwrap();
+
+    let characters_list = {
+    };
+
+    // Load a character
+    face.load_char('B' as usize, LoadFlag::RENDER).unwrap();
+    // Get the glyph instance
+    let glyph = face.glyph();
+
+    let texture = glium::texture::Texture2d::new(display, img).unwrap();
+
+    println!("texture: {:?}", texture);
 }
 
 fn handle_event<T>(event: Event<T>, control_flow: &mut ControlFlow, state: ApplicationState) -> ApplicationState {
